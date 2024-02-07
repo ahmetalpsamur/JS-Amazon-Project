@@ -1,33 +1,10 @@
-const productArray=[{
-    img:"images/products/intermediate-composite-basketball.jpg",
-    name:"Intermediate Size Basketball",
-    rating:{
-        stars:4.0,
-        count:127
-    },
-    priceCents:2095
-},
-{
-    img:"images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
-    name:"Adults Plain Cotton T-Shirt - 2 Pack",
-    rating:{
-        stars:4.5,
-        count:87
-    },
-    priceCents:1090
-},
-{
-    img:"",
-}
-]
 let htmlProducts = "";
-
-productArray.forEach(function(product){
-    let divProducts=`
+products.forEach(function (product) {
+  let divProducts = `
     <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
-              src="${product.img}">
+              src="${product.image}">
           </div>
 
           <div class="product-name limit-text-to-2-lines">
@@ -36,14 +13,14 @@ productArray.forEach(function(product){
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${product.rating.stars*10}.png">
+              src="images/ratings/rating-${product.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
               ${product.rating.count}
             </div>
           </div>
 
           <div class="product-price">
-            ${(product.priceCents/100).toFixed(2)}
+            ${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -68,11 +45,50 @@ productArray.forEach(function(product){
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button
+          button-primary js-add-to-cart"
+          data-product-id="${product.id}"
+          >
             Add to Cart
           </button>
         </div>
     `
-    htmlProducts+=divProducts
+  htmlProducts += divProducts;
 });
-document.querySelector(".js-products-grid").innerHTML=htmlProducts;
+document.querySelector(".js-products-grid").innerHTML = htmlProducts;
+
+let AddCard = document.querySelectorAll(".js-add-to-cart").forEach(function(product){
+  product.addEventListener("click",eventListener);
+  function eventListener(){
+    console.log(product.dataset.productId);
+    const productId=product.dataset.productId;
+    let mathcingItem;
+    cart.forEach(cartElement => {
+      if(cartElement.productId===productId){
+        mathcingItem=cartElement;
+      }
+    });
+    if(mathcingItem){
+      mathcingItem.quantity+=1;
+    }
+    else{
+      cart.push({
+        productId:productId,
+          quantity:1
+        });
+    }
+    console.log(cart);
+    showCartQuantity();
+  }
+});
+
+function showCartQuantity(){
+  let cart_quantity=document.querySelector(".cart-quantity");
+  let allQuantity=0;
+  cart.forEach(function(item){allQuantity+=item.quantity})
+  cart_quantity.innerHTML=allQuantity;
+}
+
+
+
+
