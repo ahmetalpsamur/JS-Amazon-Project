@@ -24,7 +24,7 @@ products.forEach(function (product) {
           </div>
 
           <div class="product-quantity-container">
-            <select>
+            <select id="select-option-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -40,7 +40,7 @@ products.forEach(function (product) {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -69,16 +69,19 @@ let AddCard = document.querySelectorAll(".js-add-to-cart").forEach(function(prod
       }
     });
     if(mathcingItem){
-      mathcingItem.quantity+=1;
+      mathcingItem.quantity+=getQuantity(productId);
+      showAdded(productId);
     }
     else{
       cart.push({
         productId:productId,
-          quantity:1
+          quantity:getQuantity(productId)
         });
+        showAdded(productId);
     }
     console.log(cart);
     showCartQuantity();
+    
   }
 });
 
@@ -88,7 +91,20 @@ function showCartQuantity(){
   cart.forEach(function(item){allQuantity+=item.quantity})
   cart_quantity.innerHTML=allQuantity;
 }
+function getQuantity(selected){
+  value =Number(document.querySelector(`#select-option-${selected}`).value);
+  console.log(value);
+  return value;
+}
+function showAdded(selected){
+  let selectAdded = document.querySelector(`.js-added-to-cart-${selected}`);
+  selectAdded.classList.add('added-to-cart-visible');
+  
+  let timeoutId = setTimeout(function(){
+    selectAdded.classList.remove("added-to-cart-visible");
+    
+  },2000)
+  
 
-
-
+}
 
