@@ -1,3 +1,8 @@
+import {cart} from "../data/cart.js";
+import {addToCart} from "../data/cart.js";
+import {products} from "../data/products.js";
+
+
 let htmlProducts = "";
 products.forEach(function (product) {
   let divProducts = `
@@ -25,6 +30,7 @@ products.forEach(function (product) {
 
           <div class="product-quantity-container">
             <select id="select-option-${product.id}">
+            <select id="select-option-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -41,6 +47,7 @@ products.forEach(function (product) {
           <div class="product-spacer"></div>
 
           <div class="added-to-cart js-added-to-cart-${product.id}">
+          <div class="added-to-cart js-added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -56,7 +63,6 @@ products.forEach(function (product) {
   htmlProducts += divProducts;
 });
 document.querySelector(".js-products-grid").innerHTML = htmlProducts;
-
 let AddCard = document.querySelectorAll(".js-add-to-cart").forEach(function(product){
   product.addEventListener("click",eventListener);
   function eventListener(){
