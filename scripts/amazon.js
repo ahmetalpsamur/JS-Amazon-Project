@@ -1,5 +1,4 @@
 import {cart} from "../data/cart.js";
-import {addToCart} from "../data/cart.js";
 import {products} from "../data/products.js";
 
 
@@ -30,7 +29,6 @@ products.forEach(function (product) {
 
           <div class="product-quantity-container">
             <select id="select-option-${product.id}">
-            <select id="select-option-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -46,7 +44,6 @@ products.forEach(function (product) {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart js-added-to-cart-${product.id}">
           <div class="added-to-cart js-added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
@@ -98,7 +95,7 @@ function showCartQuantity(){
   cart_quantity.innerHTML=allQuantity;
 }
 function getQuantity(selected){
-  value =Number(document.querySelector(`#select-option-${selected}`).value);
+  let value =Number(document.querySelector(`#select-option-${selected}`).value);
   console.log(value);
   return value;
 }
