@@ -1,7 +1,7 @@
-import {cart} from "../data/cart.js";
+import {cart,saveToStorage} from "../data/cart.js";
 import {products} from "../data/products.js";
 
-
+showCartQuantity();
 let htmlProducts = "";
 products.forEach(function (product) {
   let divProducts = `
@@ -83,6 +83,7 @@ let AddCard = document.querySelectorAll(".js-add-to-cart").forEach(function(prod
         showAdded(productId);
     }
     console.log(cart);
+    saveToStorage();
     showCartQuantity();
     
   }
