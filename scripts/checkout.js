@@ -1,5 +1,5 @@
 import { products } from "../data/products.js";
-import {cart} from "../data/cart.js";
+import {cart,removeCart} from "../data/cart.js";
 
 let orderHTML="";
 console.log(cart);
@@ -15,7 +15,7 @@ console.log(cart);
             }
         });
         orderHTML+=`
-        <div class="cart-item-container">
+        <div class="cart-item-container-${mathcingProduct.id}">
             <div class="delivery-date">
               Delivery date: Wednesday, June 15
             </div>
@@ -38,7 +38,8 @@ console.log(cart);
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete"
+                  data-product-id="${mathcingProduct.id}" >
                     Delete
                   </span>
                 </div>
@@ -91,3 +92,11 @@ console.log(cart);
         `
     });
     document.querySelector(".order-summary").innerHTML=orderHTML;
+    document.querySelectorAll(".js-delete").forEach(function (link){
+      const deleteProductId = link.dataset.productId;
+
+      link.addEventListener("click",function eventListener(){
+        removeCart(deleteProductId);
+        document.querySelector(`.cart-item-container-${deleteProductId}`).remove();
+      });
+    })
