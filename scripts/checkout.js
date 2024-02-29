@@ -29,7 +29,7 @@ console.log(cart);
                   ${mathcingProduct.name}
                 </div>
                 <div class="product-price">
-                  ${(mathcingProduct.priceCents/100).toFixed(2)}
+                  $${(mathcingProduct.priceCents/100).toFixed(2)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -51,7 +51,7 @@ console.log(cart);
 
                 <div class="delivery-option">
                   <input type="radio" class="delivery-option-input"
-                    name="delivery-option-2">
+                    name="delivery-option-${mathcingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
                       Tuesday, June 21
@@ -63,7 +63,7 @@ console.log(cart);
                 </div>
                 <div class="delivery-option">
                   <input type="radio" checked class="delivery-option-input"
-                    name="delivery-option-2">
+                    name="delivery-option-${mathcingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
                       Wednesday, June 15
@@ -75,7 +75,7 @@ console.log(cart);
                 </div>
                 <div class="delivery-option">
                   <input type="radio" class="delivery-option-input"
-                    name="delivery-option-2">
+                    name="delivery-option-${mathcingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
                       Monday, June 13
@@ -90,4 +90,4 @@ console.log(cart);
           </div>
         `
     });
-    document.querySelector(".checkout-grid").innerHTML=orderHTML;
+    document.querySelector(".order-summary").innerHTML=orderHTML;
